@@ -1,0 +1,167 @@
+fileVersion: 1
+id: 5632d1da-cd67-48bc-b27d-2417755fd443
+name: MV_lineitem1
+operation:
+  config:
+    constraints: false
+    constraintsspec:
+      items:
+        - {}
+    foreign: false
+    foreignkeycon:
+      items:
+        - {}
+    foreignkeyname: ""
+    parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
+    partclause: false
+    partitionclause:
+      items:
+        - {}
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    tableconstraints: false
+    tblproperties: ""
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b203d40d-83f5-4917-ac8a-fc94cc724bbd
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: LONG
+        description: ""
+        name: l_orderkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: fe7706a3-471b-4318-bab2-20b1c9bc593d
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 87e75d28-b682-4ca2-bf0e-a811a8f23af6
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: LONG
+        description: ""
+        name: l_partkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 173e646c-53c0-4293-b106-1a08ce7b7dd4
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4097c15c-57b4-4089-afad-b427dfbd8b36
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: LONG
+        description: ""
+        name: l_suppkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e48f4b3f-c9e5-4152-8078-66f1e3c1685d
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2eb58ec2-6374-49ad-be9a-62c7449e02ed
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: INT
+        description: ""
+        name: l_linenumber
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b62a220b-da8d-4074-8a54-b44d769eb1e4
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a5ad75f3-adba-4232-aa44-6e0809984f0a
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: DECIMAL
+        description: ""
+        name: l_quantity
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 6839e17d-57a1-44a5-b9e3-572aee47a916
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3a2165f5-3ee8-4692-9d91-ddcbf8616591
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: DECIMAL
+        description: ""
+        name: l_extendedprice
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9ad7276f-e45a-470c-a3fa-fa77e80dfd88
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 29b824fb-040e-4bf0-a7f2-9b895d9a8891
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: DECIMAL
+        description: ""
+        name: l_discount
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d8336eb8-b6d1-4437-8dee-687c5fd629ab
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 88c13bfe-9f41-406d-a55c-f56d49dfade2
+          stepCounter: 5632d1da-cd67-48bc-b27d-2417755fd443
+        config: {}
+        dataType: DECIMAL
+        description: ""
+        name: l_tax
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: fb27a40d-7fa9-4101-a834-4352864786cc
+                stepCounter: c38b955d-fd13-4665-af01-6a00a050442c
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: lineitem
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'lineitem') }} `lineitem`
+        name: MV_lineitem1
+        noLinkRefs: []
+  name: MV_lineitem1
+  overrideSQL: false
+  schema: ""
+  sqlType: "368"
+  type: sql
+  version: 1
+type: Node

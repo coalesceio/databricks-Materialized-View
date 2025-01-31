@@ -1,0 +1,13 @@
+{% if config.schedulerefresh == true %}
+
+{{ stage('Schedule Refresh-MV') }}
+
+   REFRESH MATERIALIZED VIEW
+
+{% else %}
+
+{{ stage('Schedule refesh Enabled - Nothing to do.') }}
+   
+    select 1 = 0
+	
+{% endif %}
