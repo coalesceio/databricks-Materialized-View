@@ -46,12 +46,13 @@ select 1 = 0
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
        
-            {%if currentState !=undefined%} 
+        {%if currentState !=undefined%} 
    
-          {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true ) %}
-		   ## Node
-           {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
-		   {% set joinTest = currentState.join == desiredState.join %}
+              {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true,scheduleref="",createTst=false,alterTest=false ) %}
+
+		     {# Node #}
+             {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
+		     {% set joinTest = currentState.join == desiredState.join %}
            
             {# Current State Source Storage Location Info #}
             {% for source in currentState.sources %}
@@ -115,19 +116,7 @@ select 1 = 0
                 {% endif %}
             {% endfor %}
 
-          {#Multi source#}
-			{% set mulsrcTest = currentState.desiredState.config.mstoggle == desiredState.desiredState.config.mstoggle %}
-            {% set mulsrcstraTest = currentState.desiredState.config.insertStrategy == desiredState.desiredState.config.insertStrategy %}
-            
-            {% if 
-                mulsrcTest == false or
-                mulsrcstraTest == false %}
-
-                {% set msrcTest = false %}
-            {% else %}
-                {% set msrcTest = true %}
-            {% endif %}
-
+          
           {# Test to see if the transform in a column has changed #}
           {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
           {# Current Namespace Variables Transform #}
@@ -221,7 +210,8 @@ select 1 = 0
 		  
 		   {%set securetst = currentState.config.secureOption == desiredState.config.secureOption%}
 		   {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
-		   	
+		   	{% set nodeNameTest = currentState.node.name == desiredState.node.name %}
+
             {% if 
             chngtracktst == false or
             securetst == false or 
@@ -231,21 +221,44 @@ select 1 = 0
 			      joinTest == false or 
 			      columnsTransformTest == false or 
             ns.sourcestorageLocationTest == false or
-            msrcTest == false%}    
-
-            {% set createTest = true %}
+             ns.storageLocationTest or nodeNameTest == false  %}    
+            {% set ns.createTst = true %}
           {% else %}
-            {% set createTest = false %}
-         {% endif %}      
-		 
+            {% set ns.createTst = false %}
+         {% endif %}      		 
+           
+           {{stage('Print')}}
+           {{chngtracktst  }}
+            {{securetst  }} 
+			      {{ns.othercolchanges}}
+			      {{ns.descolchanges}} 
+			      {{ns.colchanges}}
+			      {{joinTest}}
+			      {{columnsTransformTest}} 
+            {{ns.sourcestorageLocationTest }}
+             {{ns.storageLocationTest}}
+             {{ns.createTst}}
+           {# Figure out refresh schedule #}
+        
+         {% if currentState.config.schedulerefresh == true and desiredState.config.schedulerefresh == false %}
+		     {%set ns.scheduleref='DROP'%}
+             {%elif currentState.config.schedulerefresh == false and desiredState.config.schedulerefresh == true%}  
+              {%set ns.scheduleref='ADD'%}  
+	         {%elif currentState.config.schedulerefresh == true and desiredState.config.schedulerefresh == true%}
 
-        {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
-           {%set altertest = true %}		   
+             {%if currentState.config.CRON !=desiredState.config.CRON or (currentState.config.tp !=desiredState.config.tp) or (currentState.config.tph !=desiredState.config.tph) %}
+                        {%set ns.scheduleref='ALTER'%}
+             {%endif%} 				
+        
+         {% endif %}
+
+          {%if ns.createTst == false and ns.scheduleref != ""  %}    
+           {%set ns.alterTest = true %}		   
 	     {%endif%}
-
+            
     {%endif%}
 
-  {%if currentState == undefined  or createTest == true%}
+  {%if currentState == undefined  or ns.createTst == true%}
        
        
 	 {%if desiredState.config.infermvstruct == true %}
@@ -268,7 +281,7 @@ select 1 = 0
           {{ get_clause_new(join_clause) }}
 
    {%else%}
-     # Partition by clause
+     {# Partition by clause #}
 
       {%if desiredState.config.partclause == true%}
 
@@ -354,9 +367,19 @@ select 1 = 0
          {% if desiredState.node.description | length > 0 -%} COMMENT '{{ desiredState.node.description |escape }}'{%- endif%}
          {% if desiredState.config.partclause == true %} {{ nsVariables.partValues }} {%endif%}
          {%if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%endif%}
-         {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.cron == ""%}{%else%}CRON {{desiredState.config.cron}}{%endif%}
-         {%if desiredState.config.tp == 'EVERY HOUR'%}
+         {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
+         {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
          EVERY {{desiredState.config.tph}} HOUR
+         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
+         EVERY {{desiredState.config.tph}} HOURS
+         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
+         EVERY {{desiredState.config.tph}} DAY
+         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
+         EVERY {{desiredState.config.tph}} DAYS
+         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
+         EVERY {{desiredState.config.tph}} WEEKS   
+         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
+         EVERY {{desiredState.config.tph}} WEEK
          {%endif%}
          {%endif%}
         AS
@@ -373,6 +396,36 @@ select 1 = 0
         (`{{db}}`.`{{sch}}`.`{{desiredState.sources[0].dependencies[0].node.name}}`)
          {{ get_clause_new(join_clause) }}
 
-   {%endif%}
+   {%endif%} 
  {%endif%}
+     {%if ns.alterTest == true %}
+         
+       {{ stage('Alter schedule refresh', true, "sql", "alter") }}
+                {% set srcSchName = currentState.node.location.name %}
+                {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
+                {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
+
+               {%if ns.scheduleref == 'DROP'%}
+                         ALTER MATERIALIZED VIEW  "{{cdb}}"."{{csch}}"."{{desiredState.node.name}}"
+                {{ns.scheduleref}} SCHEDULE
+
+               {%else%}
+                ALTER MATERIALIZED VIEW  "{{cdb}}"."{{csch}}"."{{desiredState.node.name}}"
+                {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
+               {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
+                EVERY {{desiredState.config.tph}} HOUR
+               {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
+               EVERY {{desiredState.config.tph}} HOURS
+               {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
+               EVERY {{desiredState.config.tph}} DAY
+              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
+               EVERY {{desiredState.config.tph}} DAYS
+              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
+               EVERY {{desiredState.config.tph}} WEEKS   
+              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
+               EVERY {{desiredState.config.tph}} WEEK
+              {%endif%}
+               {%endif%} 
+            {%endif%}           
+    {%endif%}
 {%endif%}

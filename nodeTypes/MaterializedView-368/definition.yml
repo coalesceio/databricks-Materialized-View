@@ -144,9 +144,18 @@ metadata:
           enableIf: "{% if (config.schedulerefresh ) %} true {% else %} false {% endif %}"
           items:
 
+          - displayName: Task Schedule
+            attributeName: schedulePeriodOption
+            type: dropdownSelector
+            options:
+            - Periodic schedule
+            - CRON
+            isRequired: true
+      
           - displayName: Schedule refesh-CRON
             attributeName: cron
             type: textBox
+            enableIf: "{% if (config.schedulePeriodOption =='CRON' ) %} true {% else %} false {% endif %}"
           
           - displayName: Schedule refesh-time period
             attributeName: tp
@@ -158,12 +167,18 @@ metadata:
             - EVERY WEEK
             - EVERY WEEKS
             type: dropdownSelector
+            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule') %} true {% else %} true {% endif %}"
 
-          - displayName: Schedule refesh-specific time frame
+          - displayName: Specific interval of periodic refresh(integer value)
+            type: label
+
+          - displayName: HOUR OR HOURS 1 <= H <= 72  
+                         DAY  OR DAYS 1<= D <= 31
+                         WEEK OR WEEKS 1 <= W <= 8
             attributeName: tph
             type: textBox
-            enableIf: "{% if (config.tp == null) %} false {% else %} true {% endif %}"
-          
+            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule') %} true {% else %} true {% endif %}"
+
           
           
 
