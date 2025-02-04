@@ -25,7 +25,7 @@ does not permit copying or modification for any other purpose.
 {%set join_clause = desiredState.sources[0].join %}
 {% set parts = join_clause.split('FROM') %}
 {% set other_clause = parts[1] %}
-{%- set nsVariables = namespace(partValues="",primarykeyValues="",foreignkeyValues="",oconstraints="") %}
+
     
       
 {% if desiredState == currentState %}
@@ -45,11 +45,14 @@ select 1 = 0
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
+
+{% set ns = namespace( storageLocationTest= true,partValues="",primarykeyValues="",foreignkeyValues="",oconstraints="",
+descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true,scheduleref="",createTst=false,alterTest=false ) %}
+
        
         {%if currentState !=undefined%} 
    
-              {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true,scheduleref="",createTst=false,alterTest=false ) %}
-
+              
 		     {# Node #}
              {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
 		     {% set joinTest = currentState.join == desiredState.join %}
@@ -221,23 +224,12 @@ select 1 = 0
 			      joinTest == false or 
 			      columnsTransformTest == false or 
             ns.sourcestorageLocationTest == false or
-             ns.storageLocationTest or nodeNameTest == false  %}    
+             ns.storageLocationTest == false or nodeNameTest == false%}    
             {% set ns.createTst = true %}
           {% else %}
             {% set ns.createTst = false %}
          {% endif %}      		 
            
-           {{stage('Print')}}
-           {{chngtracktst  }}
-            {{securetst  }} 
-			      {{ns.othercolchanges}}
-			      {{ns.descolchanges}} 
-			      {{ns.colchanges}}
-			      {{joinTest}}
-			      {{columnsTransformTest}} 
-            {{ns.sourcestorageLocationTest }}
-             {{ns.storageLocationTest}}
-             {{ns.createTst}}
            {# Figure out refresh schedule #}
         
          {% if currentState.config.schedulerefresh == true and desiredState.config.schedulerefresh == false %}
@@ -255,7 +247,6 @@ select 1 = 0
           {%if ns.createTst == false and ns.scheduleref != ""  %}    
            {%set ns.alterTest = true %}		   
 	     {%endif%}
-            
     {%endif%}
 
   {%if currentState == undefined  or ns.createTst == true%}
@@ -288,11 +279,11 @@ select 1 = 0
        {% set column = desiredState.config.partitionclause.get('items') | map(attribute='partname.name')| list%}
 	 
 	      {% for r in column %}
-			   {% set nsVariables.partValues = nsVariables.partValues + r %}
-         {%- if not loop.last -%} {% set nsVariables.partValues = nsVariables.partValues +','%} {% endif %}
+			   {% set ns.partValues = ns.partValues + r %}
+         {%- if not loop.last -%} {% set ns.partValues = ns.partValues +','%} {% endif %}
         {% endfor %}
        
-         {% set nsVariables.partValues = 'PARTITIONED BY(' + nsVariables.partValues + ')' %} 
+         {% set ns.partValues = 'PARTITIONED BY(' + ns.partValues + ')' %} 
       {%endif%}
 
      # Primary key clause
@@ -303,11 +294,11 @@ select 1 = 0
    
 	 
 	      {% for r in column %}
-			   {% set nsVariables.primarykeyValues = nsVariables.primarykeyValues +r %}
-         {%- if not loop.last -%} {% set nsVariables.primarykeyValues = nsVariables.primarykeyValues +','%} {% endif %}
+			   {% set ns.primarykeyValues = ns.primarykeyValues +r %}
+         {%- if not loop.last -%} {% set ns.primarykeyValues = ns.primarykeyValues +','%} {% endif %}
         {% endfor %}
        
-         {% set nsVariables.primarykeyValues = 'CONSTRAINT ' + desiredState.config.primarykeyname + ' PRIMARY KEY ('+nsVariables.primarykeyValues +')' %}
+         {% set ns.primarykeyValues = 'CONSTRAINT ' + desiredState.config.primarykeyname + ' PRIMARY KEY ('+ns.primarykeyValues +')' %}
 
       {%endif%}
 
@@ -318,11 +309,11 @@ select 1 = 0
         {% set column = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkey.name')| list%}
 	 
 	      {% for r in column %}
-			   {% set nsVariables.foreignkeyValues = nsVariables.foreignkeyValues +r %}
-         {%- if not loop.last -%} {% set nsVariables.foreignkeyValues = nsVariables.foreignkeyValues +','%} {% endif %}
+			   {% set ns.foreignkeyValues = ns.foreignkeyValues +r %}
+         {%- if not loop.last -%} {% set ns.foreignkeyValues = ns.foreignkeyValues +','%} {% endif %}
         {% endfor %}
        
-         {% set nsVariables.foreignkeyValues = 'CONSTRAINT ' + desiredState.config.foreignkeyname + ' FOREIGN KEY ('+nsVariables.foreignkeyValues +')' + ' REFERENCES '+ desiredState.config.parentabname %}
+         {% set ns.foreignkeyValues = 'CONSTRAINT ' + desiredState.config.foreignkeyname + ' FOREIGN KEY ('+ns.foreignkeyValues +')' + ' REFERENCES '+ desiredState.config.parentabname %}
 
        {%endif%}
 
@@ -337,9 +328,9 @@ select 1 = 0
 	     
 	        {% for r in column %}
 	
-			      {%set nsVariables.oconstraints = nsVariables.oconstraints + 'CONSTRAINT ' + r + ' EXPECT('+ expression[loop.index0] + ') ON VIOLATION ' + violation[loop.index0] %}
+			      {%set ns.oconstraints = ns.oconstraints + 'CONSTRAINT ' + r + ' EXPECT('+ expression[loop.index0] + ') ON VIOLATION ' + violation[loop.index0] %}
            {% if not loop.last %}
-            {%set nsVariables.oconstraints = nsVariables.oconstraints +',' %}
+            {%set ns.oconstraints = ns.oconstraints +',' %}
            {% endif %}                
          {% endfor %}
 	    {%endif%}
@@ -360,12 +351,12 @@ select 1 = 0
             {%- if not loop.last %}, {% endif %}
             {%-if loop.last and (desiredState.config.foreign == true or desiredState.config.primary == true) -%},{%endif%}
         {% endfor %}
-        {% if desiredState.config.primary == true%} {{nsVariables.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif-%}{%endif%}
-        {%if desiredState.config.foreign == true%}{{nsVariables.foreignkeyValues}}{%endif%}
-        {%if desiredState.config.constraints == true%}{{nsVariables.oconstraints}}{%endif%}  )
+        {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif-%}{%endif%}
+        {%if desiredState.config.foreign == true%}{{ns.foreignkeyValues}}{%endif%}
+        {%if desiredState.config.constraints == true%}{{ns.oconstraints}}{%endif%}  )
   
          {% if desiredState.node.description | length > 0 -%} COMMENT '{{ desiredState.node.description |escape }}'{%- endif%}
-         {% if desiredState.config.partclause == true %} {{ nsVariables.partValues }} {%endif%}
+         {% if desiredState.config.partclause == true %} {{ ns.partValues }} {%endif%}
          {%if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%endif%}
          {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
          {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
@@ -406,11 +397,10 @@ select 1 = 0
                 {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
 
                {%if ns.scheduleref == 'DROP'%}
-                         ALTER MATERIALIZED VIEW  "{{cdb}}"."{{csch}}"."{{desiredState.node.name}}"
-                {{ns.scheduleref}} SCHEDULE
+                 ALTER MATERIALIZED VIEW  `{{cdb}}`.`{{csch}}`.`{{desiredState.node.name}}` {{ns.scheduleref}} SCHEDULE
 
                {%else%}
-                ALTER MATERIALIZED VIEW  "{{cdb}}"."{{csch}}"."{{desiredState.node.name}}"
+                ALTER MATERIALIZED VIEW  `{{cdb}}`.`{{csch}}`.`{{desiredState.node.name}}`
                 {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
                {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
                 EVERY {{desiredState.config.tph}} HOUR
