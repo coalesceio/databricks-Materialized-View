@@ -353,7 +353,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
          {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
          {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
          {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}
-         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz !="" %} AT TIME ZONE {{desiredState.config.crontz}} {%endif%}{%endif%}
+         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz !="" %} AT TIME ZONE '{{desiredState.config.crontz}}' {%endif%}{%endif%}
          {%-if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
          EVERY {{desiredState.config.tph}} HOURS
          {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
