@@ -67,7 +67,6 @@ metadata:
             attributeName: primarykeyname
             enableIf: "{% if (config.tableconstraints and config.primary) %} true {% else %} false {% endif %}"
 
-
           - type: tabular   
             displayName: Primary key columns
             attributeName: primarykeycon
@@ -82,32 +81,32 @@ metadata:
 
           - type: toggleButton
             displayName: Foreign key
-            attributeName: foreign
+            attributeName: foreignk
             enableIf: "{% if (config.tableconstraints) %} true {% else %} false {% endif %}"
 
-          - type: textBox
-            displayName: Foreign key Name
-            attributeName: foreignkeyname
-            enableIf: "{% if (config.tableconstraints and config.foreign) %} true {% else %} false {% endif %}"
-
-          - type: textBox
-            displayName: Parent table name
-            attributeName: parentabname
-            default: "ex:`<catalog>`.`<schema>`.`<tablename>`"
-            enableIf: "{% if (config.tableconstraints and config.foreign) %} true {% else %} false {% endif %}"
-
-          - type: tabular
-            displayName: Foreign key columns
+          - type: tabular   
+            displayName: Foreign key attributes
             attributeName: foreignkeycon
             columns:
 
-            -  type: columnDropdownSelector
-               displayName: Foreign key
-               attributeName: foreignkey
+            - type: textBox
+              displayName: Foreign key Name
+              attributeName: foreignkeyname
+              enableIf: "{% if (config.tableconstraints and config.foreignk) %} true {% else %} false {% endif %}"
+
+            - type: textBox
+              displayName: Parent table name
+              attributeName: parentabname
+              default: "ex:`<database>`.`<schema>`.`<tablename>`"
+              enableIf: "{% if (config.tableconstraints and config.foreignk) %} true {% else %} false {% endif %}"
+
+            - type: textBox
+              displayName: Foreign key columns
+              attributeName: foreignkeycol
           
             isRequired: false
-            enableIf: "{% if (config.tableconstraints and config.foreign ) %} true {% else %} false {% endif %}"
-
+            enableIf: "{% if (config.tableconstraints and config.foreignk ) %} true {% else %} false {% endif %}"
+          
           - type: toggleButton
             attributeName: constraints
             displayName: Other constraints
@@ -154,32 +153,36 @@ metadata:
             - Periodic schedule
             - CRON
       
-          - displayName: Schedule refesh-CRON
+          - displayName: CRON string
             attributeName: cron
+            type: textBox
+            enableIf: "{% if (config.schedulePeriodOption =='CRON' ) %} true {% else %} false {% endif %}"
+
+          - displayName: CRON TIME ZONE
+            attributeName: crontz
             type: textBox
             enableIf: "{% if (config.schedulePeriodOption =='CRON' ) %} true {% else %} false {% endif %}"
           
           - displayName: Schedule refesh-time period
             attributeName: tp
             options:
-            - EVERY HOUR
             - EVERY HOURS
-            - EVERY DAY
             - EVERY DAYS
-            - EVERY WEEK
             - EVERY WEEKS
             type: dropdownSelector
-            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule') %} true {% else %} true {% endif %}"
+            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule' and config.schedulePeriodOption !='CRON') %} true {% else %} false {% endif %}"
 
           - displayName: Specific interval of periodic refresh(integer value)
             type: label
+            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule' and config.schedulePeriodOption !='CRON') %} true {% else %} false {% endif %}"
+
 
           - displayName: HOUR OR HOURS 1 <= H <= 72  
                          DAY  OR DAYS 1<= D <= 31
                          WEEK OR WEEKS 1 <= W <= 8
             attributeName: tph
             type: textBox
-            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule') %} true {% else %} true {% endif %}"
+            enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule' and config.schedulePeriodOption !='CRON') %} true {% else %} false {% endif %}"
 
           
           

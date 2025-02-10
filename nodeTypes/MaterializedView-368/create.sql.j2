@@ -304,18 +304,17 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
      #Foreign key clause
 
-      {%if desiredState.config.foreign == true%}
+      {#Foreign key clause#}
 
-        {% set column = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkey.name')| list%}
-	 
-	      {% for r in column %}
-			   {% set ns.foreignkeyValues = ns.foreignkeyValues +r %}
-         {%- if not loop.last -%} {% set ns.foreignkeyValues = ns.foreignkeyValues +','%} {% endif %}
-        {% endfor %}
-       
-         {% set ns.foreignkeyValues = 'CONSTRAINT ' + desiredState.config.foreignkeyname + ' FOREIGN KEY ('+ns.foreignkeyValues +')' + ' REFERENCES '+ desiredState.config.parentabname %}
+      {%if desiredState.config.foreignk == true%}
+      {% set fname,foreigncolumns,parenttable = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeyname')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeycol')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='parentabname')| list%}
 
-       {%endif%}
+	      {% for r in fname %}
+			   
+                {% set ns.foreignkeyValues = ns.foreignkeyValues +'CONSTRAINT ' + r + ' FOREIGN KEY ('+ foreigncolumns[loop.index0] +')' + ' REFERENCES '+ parenttable[loop.index0] %}
+         {%- if not loop.last -%} {% set ns.foreignkeyValues = ns.foreignkeyValues + ' , '%} {% endif %}
+        {% endfor %}              
+     {%endif%}
 
      #Other constraints
 
@@ -352,12 +351,12 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
             {%-if loop.last and (desiredState.config.foreign == true or desiredState.config.primary == true) -%},{%-endif%}
         {%- endfor %}
         {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif%}{%endif%}
-        {%-if desiredState.config.foreign == true%}{{ns.foreignkeyValues}}{%-endif%}
+        {%-if desiredState.config.foreignk == true%}{{ns.foreignkeyValues}}{%-endif%}
         {%-if desiredState.config.constraints == true%}{{ns.oconstraints}}{%-endif%}  )  
          {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
          {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
          {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}
-         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%- if desiredState.config.schedulePeriodOption =='CRON'-%}CRON {{desiredState.config.cron}}{%endif%}
+         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz != ""%} AT TIME ZONE '{{desiredState.config.crontz}}'{%endif%}{%endif%}
          {%-if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
          EVERY {{desiredState.config.tph}} HOUR
          {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}

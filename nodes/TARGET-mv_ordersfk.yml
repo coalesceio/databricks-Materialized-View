@@ -1,6 +1,6 @@
 fileVersion: 1
 id: c183b385-baee-4393-b95b-e31d0e94f6ab
-name: MV_orders
+name: mv_ordersfk
 operation:
   config:
     constraints: false
@@ -9,16 +9,21 @@ operation:
         - {}
     cron: ""
     foreign: true
+    foreignk: true
     foreignkeycon:
       items:
-        - foreignkey: null
+        - foreignkeycol: o_orderkey,o_custkey
+          foreignkeyname: fk_1
+          parentabname: "`coalesce`.`target_de`.`orders_samp`"
     foreignkeyname: ""
     infermvstruct: false
     parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
-    partclause: false
+    partclause: true
     partitionclause:
       items:
-        - {}
+        - partname:
+            columnCounter: ea363d27-1b90-40a2-b166-d989578015a3
+            stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
     primary: false
     primarykeycon:
       items:
@@ -34,7 +39,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -44,7 +49,7 @@ operation:
           columnCounter: ea363d27-1b90-40a2-b166-d989578015a3
           stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
         config: {}
-        dataType: LONG
+        dataType: BIGINT
         description: ""
         name: o_orderkey
         nullable: true
@@ -58,7 +63,7 @@ operation:
           columnCounter: a82e3701-f067-4502-b580-1489217f3c86
           stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
         config: {}
-        dataType: LONG
+        dataType: BIGINT
         description: ""
         name: o_custkey
         nullable: true
@@ -86,7 +91,7 @@ operation:
           columnCounter: e5653e30-b7a1-47ed-a517-f9233dc04736
           stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
         config: {}
-        dataType: DECIMAL
+        dataType: DECIMAL(18,2)
         description: ""
         name: o_totalprice
         nullable: true
@@ -176,9 +181,9 @@ operation:
             nodeName: orders
         join:
           joinCondition: FROM {{ ref('SOURCE', 'orders') }} `orders`
-        name: MV_orders
+        name: mv_ordersfk
         noLinkRefs: []
-  name: MV_orders
+  name: mv_ordersfk
   overrideSQL: false
   schema: ""
   sqlType: "368"
