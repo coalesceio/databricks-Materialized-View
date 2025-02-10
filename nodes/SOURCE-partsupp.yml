@@ -1,0 +1,105 @@
+fileVersion: 1
+id: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+name: partsupp
+operation:
+  database: ""
+  dataset: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1fcc6719-816c-4a72-89f3-fbdecd1f8834
+          stepCounter: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+        config: {}
+        dataType: LONG
+        defaultValue: ""
+        description: ""
+        name: ps_partkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 566dfa8c-de5d-4a9a-b45a-d419665cca30
+          stepCounter: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+        config: {}
+        dataType: LONG
+        defaultValue: ""
+        description: ""
+        name: ps_suppkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: fa44cb0a-b3d0-486b-a6b5-03c7fbe20f95
+          stepCounter: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        name: ps_availqty
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7cba9bfe-d460-4f87-83d5-747a900fcb6e
+          stepCounter: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+        config: {}
+        dataType: DECIMAL
+        defaultValue: ""
+        description: ""
+        name: ps_supplycost
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 304fddc1-09fc-4b7b-98d7-4530ab4fd8c1
+          stepCounter: 317beb6f-10b7-4b73-b346-61fe8015d5c9
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: ps_comment
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+    join:
+      joinCondition: FROM {{ ref('SOURCE', 'partsupp') }}
+  name: partsupp
+  schema: ""
+  sqlType: Source
+  table: partsupp
+  type: sourceInput
+  version: 1
+type: Node

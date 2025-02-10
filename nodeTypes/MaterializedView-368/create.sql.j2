@@ -256,21 +256,21 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
       {{ stage('CREATE MATERIALIZED VIEW') }}
 
-      CREATE OR REPLACE MATERIALIZED VIEW{{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
-      AS
-       SELECT 
-        {% for col in desiredState.sources[0].columns %}
-            {%if col.transform == "" %}
-                `{{col.name}}`
-            {%else%}
-                 {{ get_source_transform(col) }} AS `{{ col.name }}`
-            {%endif%}
-            {%- if not loop.last -%}, {% endif %}
-        {% endfor %}
-       FROM
-        (`{{db}}`.`{{sch}}`.`{{desiredState.sources[0].dependencies[0].node.name}}`)
-          {{ get_clause_new(join_clause) }}
-
+      CREATE OR REPLACE MATERIALIZED VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }} 
+     AS
+     SELECT 
+     {%- for col in desiredState.sources[0].columns %}
+       {%- if col.transform == "" %}
+        `{{ col.name }}`
+       {%- else %}
+        {{ get_source_transform(col) }} AS `{{ col.name }}`
+       {%- endif %}
+      {%- if not loop.last -%}, {%- endif -%}
+     {%- endfor %}
+     FROM 
+     (`{{ db }}`.`{{ sch }}`.`{{ desiredState.sources[0].dependencies[0].node.name }}`)
+    {{ get_clause_new(join_clause) }} 
+    
    {%else%}
      {# Partition by clause #}
 
@@ -343,46 +343,45 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
       CREATE OR REPLACE MATERIALIZED VIEW{{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
       (
-        {% for col in desiredState.sources[0].columns %}
+        {%- for col in desiredState.sources[0].columns %}
             `{{ col.name }}` {{ col.dataType }}
             {%- if not col.nullable %} NOT NULL
-            {% endif %}
-            {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
-            {%- if not loop.last %}, {% endif %}
-            {%-if loop.last and (desiredState.config.foreign == true or desiredState.config.primary == true) -%},{%endif%}
-        {% endfor %}
-        {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif-%}{%endif%}
-        {%if desiredState.config.foreign == true%}{{ns.foreignkeyValues}}{%endif%}
-        {%if desiredState.config.constraints == true%}{{ns.oconstraints}}{%endif%}  )
-  
-         {% if desiredState.node.description | length > 0 -%} COMMENT '{{ desiredState.node.description |escape }}'{%- endif%}
-         {% if desiredState.config.partclause == true %} {{ ns.partValues }} {%endif%}
-         {%if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%endif%}
-         {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
-         {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
+            {%- endif %}
+            {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{%- endif %}
+            {%- if not loop.last %}, {%- endif %}
+            {%-if loop.last and (desiredState.config.foreign == true or desiredState.config.primary == true) -%},{%-endif%}
+        {%- endfor %}
+        {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif%}{%endif%}
+        {%-if desiredState.config.foreign == true%}{{ns.foreignkeyValues}}{%-endif%}
+        {%-if desiredState.config.constraints == true%}{{ns.oconstraints}}{%-endif%}  )  
+         {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
+         {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
+         {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}
+         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%- if desiredState.config.schedulePeriodOption =='CRON'-%}CRON {{desiredState.config.cron}}{%endif%}
+         {%-if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
          EVERY {{desiredState.config.tph}} HOUR
-         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
+         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
          EVERY {{desiredState.config.tph}} HOURS
-         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
+         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
          EVERY {{desiredState.config.tph}} DAY
-         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
+         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
          EVERY {{desiredState.config.tph}} DAYS
-         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
+         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
          EVERY {{desiredState.config.tph}} WEEKS   
-         {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
+         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
          EVERY {{desiredState.config.tph}} WEEK
-         {%endif%}
-         {%endif%}
+         {%- endif%}
+         {%- endif%}
         AS
         SELECT 
         {% for col in desiredState.sources[0].columns %}
-            {%if col.transform == "" %}
+            {%-if col.transform == "" %}
                 `{{col.name}}`
-            {%else%}
+            {%-else-%}
                  {{ get_source_transform(col) }} AS `{{ col.name }}`
-            {%endif%}
+            {%-endif-%}
             {%- if not loop.last -%}, {% endif %}
-       {% endfor %}
+       {%- endfor %}
         FROM
         (`{{db}}`.`{{sch}}`.`{{desiredState.sources[0].dependencies[0].node.name}}`)
          {{ get_clause_new(join_clause) }}

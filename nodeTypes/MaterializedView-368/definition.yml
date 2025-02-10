@@ -25,15 +25,16 @@ metadata:
           - displayName: Schedule refresh
             attributeName: schedulerefresh
             type: toggleButton
-          
+            enableIf: "{% if (config.infermvstruct) %} false {% else %} true {% endif %}"
 
         - groupName: Materialized View Options
-          enableIf: "{% if (config.infermvstructure) %} false {% else %} true {% endif %}"
+          enableIf: "{% if (config.infermvstruct) %} false {% else %} true {% endif %}"
           items:
           
           - displayName: Table properties
             attributeName: tblproperties
             type: textBox
+            
           
           - type: toggleButton
             displayName: Partition by 
@@ -112,6 +113,8 @@ metadata:
             displayName: Other constraints
             default: false
             isRequired: false
+            
+
 
           - type: tabular
             displayName: 'Constraints'
@@ -150,7 +153,6 @@ metadata:
             options:
             - Periodic schedule
             - CRON
-            isRequired: true
       
           - displayName: Schedule refesh-CRON
             attributeName: cron
