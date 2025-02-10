@@ -356,19 +356,13 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
          {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
          {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
          {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}
-         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz != ""%} AT TIME ZONE '{{desiredState.config.crontz}}'{%endif%}{%endif%}
-         {%-if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
-         EVERY {{desiredState.config.tph}} HOUR
-         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
+         {%-if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz !="" %} AT TIME ZONE {{desiredState.config.crontz}} {%endif%}{%endif%}
+         {%-if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
          EVERY {{desiredState.config.tph}} HOURS
-         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
-         EVERY {{desiredState.config.tph}} DAY
          {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
          EVERY {{desiredState.config.tph}} DAYS
          {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
          EVERY {{desiredState.config.tph}} WEEKS   
-         {%-elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
-         EVERY {{desiredState.config.tph}} WEEK
          {%- endif%}
          {%- endif%}
         AS
@@ -399,20 +393,16 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
                {%else%}
                 ALTER MATERIALIZED VIEW  `{{cdb}}`.`{{csch}}`.`{{desiredState.node.name}}`
-                {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true%}SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'%}CRON {{desiredState.config.cron}}{%endif%}
-               {%if desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOUR'%}
-                EVERY {{desiredState.config.tph}} HOUR
-               {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY HOURS' %}
-               EVERY {{desiredState.config.tph}} HOURS
-               {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAY' %}
-               EVERY {{desiredState.config.tph}} DAY
-              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY DAYS' %}
-               EVERY {{desiredState.config.tph}} DAYS
-              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEKS' %}
-               EVERY {{desiredState.config.tph}} WEEKS   
-              {%elif desiredState.config.schedulePeriodOption !='CRON' and desiredState.config.tp == 'EVERY WEEK' %}
-               EVERY {{desiredState.config.tph}} WEEK
-              {%endif%}
+                {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true-%} SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'-%} CRON {{desiredState.config.cron}}{%endif-%}
+                {%- if desiredState.config.schedulePeriodOption != 'CRON' -%}
+                   {%- if desiredState.config.tp == 'EVERY HOURS' -%}
+                      EVERY {{ desiredState.config.tph }} HOURS
+                   {%- elif desiredState.config.tp == 'EVERY DAYS' -%}
+                       EVERY {{ desiredState.config.tph }} DAYS
+                   {%- elif desiredState.config.tp == 'EVERY WEEKS' -%}
+                       EVERY {{ desiredState.config.tph }} WEEKS
+                   {%- endif %}
+                {%- endif %}
                {%endif%} 
             {%endif%}           
     {%endif%}

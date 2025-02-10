@@ -9,6 +9,7 @@ operation:
         - {}
     cron: ""
     foreign: false
+    foreignk: false
     foreignkeycon:
       items:
         - {}
@@ -30,7 +31,7 @@ operation:
     schedulerefresh: true
     tableconstraints: true
     tblproperties: ""
-    tp: EVERY HOUR
+    tp: EVERY WEEKS
     tph: "1"
   database: ""
   deployEnabled: true
