@@ -8,7 +8,24 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Version        : 1  == #}
 {# == Node Type Name           : Materialized View  == #}
 {# == Node Type Description    : This node creates a materialized view in the target == #}
+    
+      
+{% if desiredState == currentState %}
 
+{{ stage('Nothing to do.') }}
+select 1 = 0
+
+{% elif desiredState == undefined %}
+
+    {# View Name #}
+    {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
+    {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
+    {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
+    
+       {{ stage('Drop Materialized View' , true, "sql", "drop") }}
+       DROP MATERIALIZED VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
+
+{% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
 # Storage Location-database and schema
 
@@ -25,26 +42,6 @@ does not permit copying or modification for any other purpose.
 {%set join_clause = desiredState.sources[0].join %}
 {% set parts = join_clause.split('FROM') %}
 {% set other_clause = parts[1] %}
-
-    
-      
-{% if desiredState == currentState %}
-
-{{ stage('Nothing to do.') }}
-select 1 = 0
-
-{% elif desiredState == undefined %}
-
-    {# View Name #}
-    {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
-    {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
-    {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
-    
-       {{ stage('Drop View' , true, "sql", "drop") }}
-       DROP VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
-
-{% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
-
 
 {% set ns = namespace( storageLocationTest= true,partValues="",primarykeyValues="",foreignkeyValues="",oconstraints="",
 descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true,scheduleref="",createTst=false,alterTest=false ) %}
