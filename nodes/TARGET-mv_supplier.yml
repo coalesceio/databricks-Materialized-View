@@ -28,7 +28,7 @@ operation:
     tableconstraints: false
     tblproperties: ""
     tp: EVERY HOURS
-    tph: "8"
+    tph: "16"
   database: ""
   deployEnabled: true
   description: ""
