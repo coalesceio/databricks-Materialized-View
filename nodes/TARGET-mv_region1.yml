@@ -1,0 +1,108 @@
+fileVersion: 1
+id: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+name: mv_region1
+operation:
+  config:
+    constraints: false
+    constraintsspec:
+      items:
+        - {}
+    cron: ""
+    foreign: false
+    foreignkeycon:
+      items:
+        - {}
+    foreignkeyname: ""
+    infermvstruct: false
+    parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
+    partclause: true
+    partitionclause:
+      items:
+        - partname:
+            columnCounter: 8e101113-593c-49dd-a709-816791baaac1
+            stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+        - partname:
+            columnCounter: b88d52a7-8174-40aa-bad9-1f88fefbaf85
+            stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    schedulePeriodOption: ""
+    schedulerefresh: false
+    tableconstraints: false
+    tblproperties: pipelines.channel = "PREVIEW"
+    tp: ""
+    tph: ""
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8e101113-593c-49dd-a709-816791baaac1
+          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+        config: {}
+        dataType: LONG
+        description: ""
+        name: r_regionkey
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 13ef93ab-198b-4401-9daf-aab063536e7c
+                stepCounter: c2e24433-f863-4a12-b733-5059c5c7d5e8
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b88d52a7-8174-40aa-bad9-1f88fefbaf85
+          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+        config: {}
+        dataType: STRING
+        description: ""
+        name: r_name
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a280d48e-040d-498b-ab81-ec1083d352e4
+                stepCounter: c2e24433-f863-4a12-b733-5059c5c7d5e8
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d3c71afe-b027-4ca6-b0c0-37c7e7824f35
+          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+        config: {}
+        dataType: STRING
+        description: ""
+        name: r_comment
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4d729577-efc8-4e9a-9cda-89bf8229b413
+                stepCounter: c2e24433-f863-4a12-b733-5059c5c7d5e8
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: region
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'region') }} `region`
+        name: mv_region1
+        noLinkRefs: []
+  name: mv_region1
+  overrideSQL: false
+  schema: ""
+  sqlType: "368"
+  type: sql
+  version: 1
+type: Node
