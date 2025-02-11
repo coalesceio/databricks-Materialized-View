@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 90427190-feeb-40ff-8692-2f5e790f2d45
-name: MV_lineitem
+name: mv_lineitem
 operation:
   config:
     constraints: false
@@ -163,9 +163,9 @@ operation:
             nodeName: lineitem
         join:
           joinCondition: FROM {{ ref('SOURCE', 'lineitem') }} `lineitem`
-        name: MV_lineitem
+        name: mv_lineitem
         noLinkRefs: []
-  name: MV_lineitem
+  name: mv_lineitem
   overrideSQL: false
   schema: ""
   sqlType: "368"

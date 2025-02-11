@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 361e01b6-3ba0-4514-aad2-52159b4ace89
-name: MV_nationsamp
+name: mv_nationsamp
 operation:
   config:
     constraints: false
@@ -109,9 +109,9 @@ operation:
             nodeName: nation
         join:
           joinCondition: FROM {{ ref('SOURCE', 'nation') }} `nation`
-        name: MV_nationsamp
+        name: mv_nationsamp
         noLinkRefs: []
-  name: MV_nationsamp
+  name: mv_nationsamp
   overrideSQL: false
   schema: ""
   sqlType: "368"

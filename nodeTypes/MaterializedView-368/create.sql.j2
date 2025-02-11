@@ -337,7 +337,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
        {{ stage('CREATE MATERIALIZED VIEW') }}
 
-      CREATE OR REPLACE MATERIALIZED VIEW{{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+      CREATE OR REPLACE MATERIALIZED VIEW  {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
       (
         {%- for col in desiredState.sources[0].columns %}
             `{{ col.name }}` {{ col.dataType }}
