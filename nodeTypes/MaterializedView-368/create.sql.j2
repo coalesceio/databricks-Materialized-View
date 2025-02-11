@@ -251,7 +251,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
        
 	 {%if desiredState.config.infermvstruct == true %}
 
-      {{ stage('CREATE MATERIALIZED VIEW') }}
+      {{ stage('CREATE MATERIALIZED VIEW',true, "sql", "create") }}
 
       CREATE OR REPLACE MATERIALIZED VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }} 
      AS
@@ -335,7 +335,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
        {# CreateSQL for Materialized view #}
 
-       {{ stage('CREATE MATERIALIZED VIEW') }}
+       {{ stage('CREATE MATERIALIZED VIEW', true, "sql", "create") }}
 
       CREATE OR REPLACE MATERIALIZED VIEW  {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
       (
