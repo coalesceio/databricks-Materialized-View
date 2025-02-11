@@ -390,7 +390,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
                {%else%}
                 ALTER MATERIALIZED VIEW  `{{cdb}}`.`{{csch}}`.`{{desiredState.node.name}}`
-                {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true-%} SCHEDULE REFRESH {%if desiredState.config.schedulePeriodOption =='CRON'-%} CRON {{desiredState.config.cron}}{%endif-%}
+                {{ns.scheduleref}}  {%if desiredState.config.schedulerefresh == true-%} SCHEDULE REFRESH {% if desiredState.config.schedulePeriodOption =='CRON'%}  CRON '{{desiredState.config.cron}}' {%if desiredState.config.crontz !="" %} AT TIME ZONE '{{desiredState.config.crontz}}' {%endif%}{%endif%}
                 {%- if desiredState.config.schedulePeriodOption != 'CRON' -%}
                    {%- if desiredState.config.tp == 'EVERY HOURS' -%}
                       EVERY {{ desiredState.config.tph }} HOURS
