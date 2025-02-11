@@ -26,12 +26,12 @@ operation:
         - primarykey:
             columnCounter: 1db14001-b1d8-44ba-a965-d84ed0b38a00
             stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
-    primarykeyname: pk_nation
+    primarykeyname: pk_nations
     schedulePeriodOption: Periodic schedule
     schedulerefresh: true
     tableconstraints: true
     tblproperties: ""
-    tp: EVERY DAYS
+    tp: EVERY WEEKS
     tph: "2"
   database: ""
   deployEnabled: true

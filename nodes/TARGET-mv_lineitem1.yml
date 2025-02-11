@@ -10,6 +10,7 @@ operation:
           onviolation: null
           sqlExpression: ex:<column_name> IS NOT NULL
     foreign: false
+    foreignk: false
     foreignkeycon:
       items:
         - {}
@@ -27,7 +28,7 @@ operation:
         - primarykey:
             columnCounter: b2ed2b05-abb1-4473-9d90-31494bd05a26
             stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
-    primarykeyname: pk_5
+    primarykeyname: pk_item
     tableconstraints: true
     tblproperties: |
       pipelines.channel = "PREVIEW"

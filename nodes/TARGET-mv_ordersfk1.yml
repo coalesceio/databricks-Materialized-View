@@ -13,7 +13,7 @@ operation:
     foreignkeycon:
       items:
         - foreignkeycol: o_orderkey,o_custkey
-          foreignkeyname: fk_1
+          foreignkeyname: fk_2
           parentabname: "`coalesce`.`target_de`.`orders_samp`"
     foreignkeyname: ""
     infermvstruct: false
