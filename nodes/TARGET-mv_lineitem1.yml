@@ -15,6 +15,7 @@ operation:
       items:
         - {}
     foreignkeyname: ""
+    infermvstruct: true
     parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
     partclause: true
     partitionclause:
@@ -29,6 +30,7 @@ operation:
             columnCounter: b2ed2b05-abb1-4473-9d90-31494bd05a26
             stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
     primarykeyname: pk_item
+    schedulerefresh: false
     tableconstraints: true
     tblproperties: |
       pipelines.channel = "PREVIEW"
@@ -102,7 +104,7 @@ operation:
           columnCounter: d57ccd48-d6a1-45ea-a008-d6268f1ae8dc
           stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
         config: {}
-        dataType: DECIMAL(18,2)
+        dataType: DECIMAL
         description: ""
         name: l_quantity
         nullable: true
@@ -116,7 +118,7 @@ operation:
           columnCounter: 84efa5ab-636d-4584-a813-267b58839fa8
           stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
         config: {}
-        dataType: DECIMAL(18,2)
+        dataType: DECIMAL
         description: ""
         name: l_extendedprice
         nullable: true
@@ -130,7 +132,7 @@ operation:
           columnCounter: e1ee52f9-4062-4b3e-914c-899793df9161
           stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
         config: {}
-        dataType: DECIMAL(18,2)
+        dataType: DECIMAL
         description: ""
         name: l_discount
         nullable: true
@@ -144,7 +146,7 @@ operation:
           columnCounter: e7656744-a03f-43cb-8ebc-b343a8de646d
           stepCounter: 90427190-feeb-40ff-8692-2f5e790f2d45
         config: {}
-        dataType: DECIMAL(18,2)
+        dataType: DECIMAL
         description: ""
         name: l_tax
         nullable: true

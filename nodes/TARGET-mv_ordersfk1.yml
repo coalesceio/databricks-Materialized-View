@@ -91,7 +91,7 @@ operation:
           columnCounter: e5653e30-b7a1-47ed-a517-f9233dc04736
           stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
         config: {}
-        dataType: DECIMAL(18,2)
+        dataType: DECIMAL
         description: ""
         name: o_totalprice
         nullable: true

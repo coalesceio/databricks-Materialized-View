@@ -32,7 +32,7 @@ operation:
     tableconstraints: true
     tblproperties: ""
     tp: EVERY WEEKS
-    tph: "2"
+    tph: "3"
   database: ""
   deployEnabled: true
   description: ""
