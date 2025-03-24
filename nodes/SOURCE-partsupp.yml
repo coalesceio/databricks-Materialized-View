@@ -3,7 +3,6 @@ id: 317beb6f-10b7-4b73-b346-61fe8015d5c9
 name: partsupp
 operation:
   database: ""
-  dataset: ""
   deployEnabled: true
   description: ""
   locationName: SOURCE
@@ -94,12 +93,9 @@ operation:
           - columnReferences: []
             transform: ""
         transform: ""
-    join:
-      joinCondition: FROM {{ ref('SOURCE', 'partsupp') }}
   name: partsupp
   schema: ""
   sqlType: Source
-  table: partsupp
   type: sourceInput
   version: 1
 type: Node

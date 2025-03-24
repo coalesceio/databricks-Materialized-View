@@ -3,7 +3,6 @@ id: cce4718e-4fa3-4700-b934-4b514c0887a0
 name: nation
 operation:
   database: ""
-  dataset: ""
   deployEnabled: true
   description: ""
   locationName: SOURCE
@@ -77,12 +76,9 @@ operation:
           - columnReferences: []
             transform: ""
         transform: ""
-    join:
-      joinCondition: FROM {{ ref('SOURCE', 'nation') }}
   name: nation
   schema: ""
   sqlType: Source
-  table: nation
   type: sourceInput
   version: 1
 type: Node
