@@ -22,6 +22,11 @@ There are four configs within the **Node Properties** group.
 | **Node Type** | Name of template used to create node objects |
 | **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
+### Key point 
+
+* Materialized View automatically infers the structure of the source table and defines the data type of columns.Hence we create materialized view without column definition in Infer stage(keeping infer toggle enabled)
+* Re-Sync the columns and the mapping grid will be updated with the expected column structure
+* Keep the infer toggle off,create the Materializsed View with the intended column or table-level constraints 
 
 ### General Options
 
@@ -86,4 +91,6 @@ This is executed as a single stage:
 
 ## Code
 
-* [Node definition]
+* [Node definition](https://github.com/coalesceio/databricks-Materialized-View/blob/main/nodeTypes/MaterializedView-368/definition.yml)
+* [Create template](https://github.com/coalesceio/databricks-Materialized-View/blob/main/nodeTypes/MaterializedView-368/create.sql.j2)
+* [Run template](https://github.com/coalesceio/databricks-Materialized-View/blob/main/nodeTypes/MaterializedView-368/run.sql.j2)
