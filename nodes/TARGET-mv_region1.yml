@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
-name: mv_region
+name: mv_region1
 operation:
   config:
     constraints: false
@@ -97,9 +97,9 @@ operation:
             nodeName: region
         join:
           joinCondition: FROM {{ ref('SOURCE', 'region') }} `region`
-        name: mv_region
+        name: mv_region1
         noLinkRefs: []
-  name: mv_region
+  name: mv_region1
   overrideSQL: false
   schema: ""
   sqlType: "368"
