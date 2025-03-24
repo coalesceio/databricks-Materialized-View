@@ -6,6 +6,6 @@ mappingDefinitions:
     schema: sample_data
   TARGET:
     database: coalesce
-    schema: target_dev
+    schema: target_dep
 name: DEP_QA2
 type: Environment

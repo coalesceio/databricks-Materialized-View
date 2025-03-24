@@ -3,7 +3,6 @@ id: c38b955d-fd13-4665-af01-6a00a050442c
 name: lineitem
 operation:
   database: ""
-  dataset: ""
   deployEnabled: true
   description: ""
   locationName: SOURCE
@@ -281,12 +280,9 @@ operation:
           - columnReferences: []
             transform: ""
         transform: ""
-    join:
-      joinCondition: FROM {{ ref('SOURCE', 'lineitem') }}
   name: lineitem
   schema: ""
   sqlType: Source
-  table: lineitem
   type: sourceInput
   version: 1
 type: Node
