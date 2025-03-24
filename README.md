@@ -1,5 +1,9 @@
 # Databricks Materialized View Stage
 
+The Databricks Materialized View Stage UDN is a versatile node that allows you to develop and deploy a Materialized View in Databricks.
+
+A [materialized view](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-materialized-view) is a view where precomputed results are available for query and can be updated to reflect changes in the input. Each time a materialized view is refreshed, query results are recalculated to reflect changes in upstream datasets. All materialized views are backed by a DLT pipeline. You can refresh materialized views manually or on a schedule.
+
 ## Node Configuration
 
 The Databricks Materialized View Stage has Four configuration groups:
@@ -8,7 +12,6 @@ The Databricks Materialized View Stage has Four configuration groups:
 * [General Options](#general-options)
 * [Materialized View Options](#materialized-view-options)
 * [Schedule Option](#schedule-option)
-
 
 ### Node Properties
 There are four configs within the **Node Properties** group.
@@ -24,7 +27,7 @@ There are four configs within the **Node Properties** group.
 
 | **Option** | **Description** |
 |------------|----------------|
-| **Infer MV structure** | True / False toggle<br/>- **True**: Materialized View Options will disabled<br/>- **False**:  Materialized View Options will be visible  |
+| **Infer MV structure** | True / False toggle<br/>- **True**: Materialized View Options will be disabled<br/>- **False**:  Materialized View Options will be visible  |
 |**Schedule refresh**| True / False toggle<br/>- **True**: Schedule Option will be visible<br/>- **False**:  Schedule Option will be disabled|
 
 ### Materialized View Options
@@ -40,8 +43,8 @@ Materialized View Options is available only when Infer MV Structure toggle is Fa
 |**Other constraints**|True / False Toggle <br/> Constraints : Text box appear where we can add constraints on selected column<br/>Options<br/>-ColumnName :  From column dropdown we can add columns<br/>-Expected Expression : can give specific Expression<br/>-ON VIOLATION : Two options can be selected from dropdown - Fail Update, Drop Row    |
 
 ### Schedule Options
-ue
-Schedule Options is available only when Schedule Refresh toggle is Tr
+
+Schedule Options is available only when Schedule Refresh toggle is True
 
 | **Option** | **Description** |
 |------------|----------------|
