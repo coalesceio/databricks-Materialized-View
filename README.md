@@ -70,13 +70,6 @@ After the Materialized View has deployed for the first time into a target enviro
 
 If a Materialized View is to be altered this will run the following stage:
 
-| **Stage** | **Description** |
-|-----------|----------------|
-| **Alter Materialized View** | This stage will execute an ALTER statement and alter the Materialized View in the target environment setting the new parameters |
-  
-#### Altering the Materialized View
-  
-
 #### Recreating the Materialized View
 
 If anything changes other than the configuration options specified above then the Materialized View will be recreated by running a CREATE OR REPLACE statement.
