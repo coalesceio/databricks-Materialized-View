@@ -15,16 +15,18 @@ metadata:
 
 
     config:
-        - groupName: General options
+        - groupName: Materialization Type
+          enableIf: "false"
           items:
-
           - displayName: Object Type
             attributeName: materializationSelector
             type: materializationSelector
             default: MATERIALIZED VIEW
             options:
             - MATERIALIZED VIEW
-            enableIf: "false"
+            
+        - groupName: General options
+          items:
 
           - displayName: Infer MV structure
             attributeName: infermvstruct
