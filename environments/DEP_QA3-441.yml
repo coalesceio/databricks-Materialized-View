@@ -2,10 +2,10 @@ fileVersion: 1
 id: "441"
 mappingDefinitions:
   SOURCE:
-    database: coalesce
-    schema: sample_data
+    database: coalesce_aws_dbx
+    schema: dlt_demo
   TARGET:
-    database: coalesce
-    schema: target_dev
+    database: coalesce_aws_dbx
+    schema: de-target-dev
 name: DEP_QA3
 type: Environment
