@@ -1,13 +1,14 @@
 fileVersion: 1
-id: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
-name: mv_region1
+id: c0db0933-7d06-4082-b219-02c5538ea048
+name: mv_region_cron12
 operation:
   config:
     constraints: false
     constraintsspec:
       items:
         - {}
-    cron: ""
+    cron: 0 0 0 * * ? *
+    crontz: America/Los_Angeles
     foreign: false
     foreignkeycon:
       items:
@@ -15,22 +16,18 @@ operation:
     foreignkeyname: ""
     infermvstruct: false
     parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
-    partclause: true
+    partclause: false
     partitionclause:
       items:
-        - partname:
-            columnCounter: 8e101113-593c-49dd-a709-816791baaac1
-            stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
-        - partname:
-            columnCounter: b88d52a7-8174-40aa-bad9-1f88fefbaf85
-            stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+        - {}
+        - {}
     primary: false
     primarykeycon:
       items:
         - {}
     primarykeyname: ""
-    schedulePeriodOption: ""
-    schedulerefresh: false
+    schedulePeriodOption: CRON
+    schedulerefresh: true
     tableconstraints: false
     tblproperties: pipelines.channel = "PREVIEW"
     tp: ""
@@ -46,8 +43,8 @@ operation:
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 8e101113-593c-49dd-a709-816791baaac1
-          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+          columnCounter: 841b50ea-46c2-407b-bcf5-cd4cf7d41317
+          stepCounter: c0db0933-7d06-4082-b219-02c5538ea048
         config: {}
         dataType: LONG
         description: ""
@@ -60,8 +57,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: b88d52a7-8174-40aa-bad9-1f88fefbaf85
-          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+          columnCounter: 59b73086-3aef-44f7-8eff-b0cf1fc5d88e
+          stepCounter: c0db0933-7d06-4082-b219-02c5538ea048
         config: {}
         dataType: STRING
         description: ""
@@ -74,8 +71,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: d3c71afe-b027-4ca6-b0c0-37c7e7824f35
-          stepCounter: 5bbd717c-d003-42ec-8c02-55ebb2196a1c
+          columnCounter: 9c79d691-2a86-466b-bdcc-049ebc3001ff
+          stepCounter: c0db0933-7d06-4082-b219-02c5538ea048
         config: {}
         dataType: STRING
         description: ""
@@ -97,9 +94,9 @@ operation:
             nodeName: region
         join:
           joinCondition: FROM {{ ref('SOURCE', 'region') }} `region`
-        name: mv_region1
+        name: mv_region_cron12
         noLinkRefs: []
-  name: mv_region1
+  name: mv_region_cron12
   overrideSQL: false
   schema: ""
   sqlType: "368"
