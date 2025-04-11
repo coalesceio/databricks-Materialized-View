@@ -37,7 +37,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: table
+  materializationType: MATERIALIZED VIEW
   metadata:
     appliedNodeTests: []
     columns:

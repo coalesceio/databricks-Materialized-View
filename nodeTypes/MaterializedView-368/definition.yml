@@ -194,9 +194,5 @@ metadata:
             type: textBox
             enableIf: "{% if (config.schedulePeriodOption == 'Periodic schedule' and config.schedulePeriodOption !='CRON') %} true {% else %} false {% endif %}"
 
-          
-          
-
-
 name: Materialized View
 type: NodeType
