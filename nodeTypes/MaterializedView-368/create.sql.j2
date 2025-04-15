@@ -48,6 +48,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 		     {# Node #}
              {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
 		     {% set joinTest = currentState.join == desiredState.join %}
+             {%set nodeCommentTest = currentState.node.description == desiredState.node.description %}
            
             {# Current State Source Storage Location Info #}
             {% for source in currentState.sources %}
@@ -216,7 +217,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 			      joinTest == false or 
 			      columnsTransformTest == false or 
             ns.sourcestorageLocationTest == false or
-             ns.storageLocationTest == false or nodeNameTest == false%}    
+             ns.storageLocationTest == false or nodeNameTest == false or nodeCommentTest == false%}    
             {% set ns.createTst = true %}
           {% else %}
             {% set ns.createTst = false %}
