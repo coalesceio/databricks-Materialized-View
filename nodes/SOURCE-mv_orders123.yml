@@ -32,7 +32,7 @@ operation:
     tph: "2"
   database: ""
   deployEnabled: true
-  description: ""
+  description: Materialized Order View
   isMultisource: false
   locationName: SOURCE
   materializationType: MATERIALIZED VIEW

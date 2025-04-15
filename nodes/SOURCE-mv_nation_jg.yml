@@ -24,12 +24,12 @@ operation:
       items:
         - {}
     primarykeyname: ""
-    schedulePeriodOption: ""
-    schedulerefresh: false
+    schedulePeriodOption: Periodic schedule
+    schedulerefresh: true
     tableconstraints: false
     tblproperties: ""
-    tp: ""
-    tph: ""
+    tp: EVERY DAYS
+    tph: "3"
   database: ""
   deployEnabled: true
   description: ""
@@ -79,20 +79,6 @@ operation:
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: 4e99d0f2-7979-4bc5-80a1-abc92c4cdab1
-                stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
-          columnCounter: 2b4f0a9c-39e8-409f-b9cb-2b27d0513b60
-          stepCounter: 39df7b86-8a1d-4f12-80b3-2bddb5fcd1b9
-        config: {}
-        dataType: STRING
-        description: ""
-        name: n_comment
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: fd3a9dfe-bcf3-49bb-9a41-1f25c428f7fc
                 stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
             transform: ""
     cteString: ""
