@@ -24,12 +24,12 @@ operation:
       items:
         - {}
     primarykeyname: ""
-    schedulePeriodOption: ""
-    schedulerefresh: false
+    schedulePeriodOption: Periodic schedule
+    schedulerefresh: true
     tableconstraints: false
     tblproperties: ""
-    tp: ""
-    tph: ""
+    tp: EVERY HOURS
+    tph: "2"
   database: ""
   deployEnabled: true
   description: ""
