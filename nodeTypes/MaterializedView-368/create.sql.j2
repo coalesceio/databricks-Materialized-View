@@ -9,13 +9,8 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Materialized View  == #}
 {# == Node Type Description    : This node creates a materialized view in the target == #}
     
-      
-{% if desiredState == currentState %}
 
-{{ stage('Nothing to do.') }}
-select 1 = 0
-
-{% elif desiredState == undefined %}
+{% if desiredState == undefined %}
 
     {# View Name #}
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
