@@ -16,7 +16,7 @@ metadata:
 
     config:
         - groupName: Materialization Type
-          enableIf: "false"
+          enableIf: "true"
           items:
           - displayName: Object Type
             attributeName: materializationSelector
