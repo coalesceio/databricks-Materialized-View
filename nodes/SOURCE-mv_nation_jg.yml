@@ -29,7 +29,7 @@ operation:
     tableconstraints: false
     tblproperties: ""
     tp: EVERY DAYS
-    tph: "3"
+    tph: "5"
   database: ""
   deployEnabled: true
   description: ""

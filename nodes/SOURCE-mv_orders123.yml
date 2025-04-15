@@ -7,8 +7,8 @@ operation:
     constraintsspec:
       items:
         - {}
-    cron: ""
-    crontz: ""
+    cron: 0 0 0 * * ? *
+    crontz: America/Los_Angeles
     foreignk: false
     foreignkeycon:
       items:
@@ -24,7 +24,7 @@ operation:
       items:
         - {}
     primarykeyname: ""
-    schedulePeriodOption: Periodic schedule
+    schedulePeriodOption: CRON
     schedulerefresh: true
     tableconstraints: false
     tblproperties: ""
