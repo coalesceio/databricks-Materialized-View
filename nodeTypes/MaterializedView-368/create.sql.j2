@@ -9,13 +9,8 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Materialized View  == #}
 {# == Node Type Description    : This node creates a materialized view in the target == #}
     
-      
-{% if desiredState == currentState %}
 
-{{ stage('Nothing to do.') }}
-select 1 = 0
-
-{% elif desiredState == undefined %}
+{% if desiredState == undefined %}
 
     {# View Name #}
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
@@ -53,6 +48,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 		     {# Node #}
              {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
 		     {% set joinTest = currentState.join == desiredState.join %}
+             {%set nodeCommentTest = currentState.node.description == desiredState.node.description %}
            
             {# Current State Source Storage Location Info #}
             {% for source in currentState.sources %}
@@ -221,7 +217,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 			      joinTest == false or 
 			      columnsTransformTest == false or 
             ns.sourcestorageLocationTest == false or
-             ns.storageLocationTest == false or nodeNameTest == false%}    
+             ns.storageLocationTest == false or nodeNameTest == false or nodeCommentTest == false%}    
             {% set ns.createTst = true %}
           {% else %}
             {% set ns.createTst = false %}
@@ -235,7 +231,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
               {%set ns.scheduleref='ADD'%}  
 	         {%elif currentState.config.schedulerefresh == true and desiredState.config.schedulerefresh == true%}
 
-             {%if currentState.config.CRON !=desiredState.config.CRON or (currentState.config.tp !=desiredState.config.tp) or (currentState.config.tph !=desiredState.config.tph) %}
+             {%if currentState.config.CRON !=desiredState.config.CRON or (currentState.config.tp !=desiredState.config.tp) or (currentState.config.tph !=desiredState.config.tph) or (currentState.config.schedulePeriodOption !=desiredState.config.schedulePeriodOption) %}
                         {%set ns.scheduleref='ALTER'%}
              {%endif%} 				
         
@@ -251,7 +247,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
        
 	 {%if desiredState.config.infermvstruct == true %}
 
-      {{ stage('CREATE MATERIALIZED VIEW') }}
+      {{ stage('CREATE MATERIALIZED VIEW',true, "sql", "create") }}
 
       CREATE OR REPLACE MATERIALIZED VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }} 
      AS
@@ -335,9 +331,9 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
        {# CreateSQL for Materialized view #}
 
-       {{ stage('CREATE MATERIALIZED VIEW') }}
+       {{ stage('CREATE MATERIALIZED VIEW', true, "sql", "create") }}
 
-      CREATE OR REPLACE MATERIALIZED VIEW{{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+      CREATE OR REPLACE MATERIALIZED VIEW  {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
       (
         {%- for col in desiredState.sources[0].columns %}
             `{{ col.name }}` {{ col.dataType }}

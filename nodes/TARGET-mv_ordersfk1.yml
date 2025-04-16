@@ -6,7 +6,9 @@ operation:
     constraints: false
     constraintsspec:
       items:
-        - {}
+        - columnName: null
+          onviolation: null
+          sqlExpression: ex:<column_name> IS NOT NULL
     cron: ""
     foreign: true
     foreignk: true
@@ -52,7 +54,7 @@ operation:
         dataType: BIGINT
         description: ""
         name: o_orderkey
-        nullable: true
+        nullable: false
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: fa32ed37-48f0-4f5c-ae64-4a7e8c50bd84
@@ -91,7 +93,7 @@ operation:
           columnCounter: e5653e30-b7a1-47ed-a517-f9233dc04736
           stepCounter: c183b385-baee-4393-b95b-e31d0e94f6ab
         config: {}
-        dataType: DECIMAL
+        dataType: DECIMAL(18,2)
         description: ""
         name: o_totalprice
         nullable: true

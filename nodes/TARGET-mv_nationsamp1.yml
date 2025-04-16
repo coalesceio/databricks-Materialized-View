@@ -14,7 +14,7 @@ operation:
       items:
         - {}
     foreignkeyname: ""
-    infermvstruct: false
+    infermvstruct: true
     parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
     partclause: false
     partitionclause:
@@ -42,62 +42,74 @@ operation:
   metadata:
     appliedNodeTests: []
     columns:
-      - appliedColumnTests: {}
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
         columnReference:
           columnCounter: 1db14001-b1d8-44ba-a965-d84ed0b38a00
           stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
         config: {}
         dataType: LONG
+        defaultValue: ""
         description: ""
         name: n_nationkey
-        nullable: false
+        nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: f074421d-a668-4f46-8545-732ab49cf8c9
-                stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
+          - columnReferences: []
             transform: ""
-      - appliedColumnTests: {}
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
         columnReference:
           columnCounter: 5d056923-4064-4f45-b9b7-ed41c2f0b598
           stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
         config: {}
         dataType: STRING
+        defaultValue: ""
         description: ""
         name: n_name
         nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 2942f1f4-3671-4b17-915b-e0cc7fa11317
-                stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
+          - columnReferences: []
             transform: ""
-      - appliedColumnTests: {}
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
         columnReference:
           columnCounter: 9c3921fd-0041-418e-9e80-df8bebf52e9a
           stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
         config: {}
         dataType: LONG
+        defaultValue: ""
         description: ""
         name: n_regionkey
         nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 4e99d0f2-7979-4bc5-80a1-abc92c4cdab1
-                stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
+          - columnReferences: []
             transform: ""
-      - appliedColumnTests: {}
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
         columnReference:
           columnCounter: ee1abc9e-ed9b-4247-809d-0b3eb04a894b
           stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
         config: {}
         dataType: STRING
+        defaultValue: ""
         description: ""
         name: n_comment
         nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: fd3a9dfe-bcf3-49bb-9a41-1f25c428f7fc
-                stepCounter: cce4718e-4fa3-4700-b934-4b514c0887a0
+          - columnReferences: []
             transform: ""
+        transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
