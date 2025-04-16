@@ -231,7 +231,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
               {%set ns.scheduleref='ADD'%}  
 	         {%elif currentState.config.schedulerefresh == true and desiredState.config.schedulerefresh == true%}
 
-             {%if currentState.config.CRON !=desiredState.config.CRON or (currentState.config.tp !=desiredState.config.tp) or (currentState.config.tph !=desiredState.config.tph) %}
+             {%if currentState.config.CRON !=desiredState.config.CRON or (currentState.config.tp !=desiredState.config.tp) or (currentState.config.tph !=desiredState.config.tph) or (currentState.config.schedulePeriodOption !=desiredState.config.schedulePeriodOption) %}
                         {%set ns.scheduleref='ALTER'%}
              {%endif%} 				
         

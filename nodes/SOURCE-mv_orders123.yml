@@ -24,12 +24,12 @@ operation:
       items:
         - {}
     primarykeyname: ""
-    schedulePeriodOption: CRON
+    schedulePeriodOption: Periodic schedule
     schedulerefresh: true
     tableconstraints: false
     tblproperties: ""
     tp: EVERY HOURS
-    tph: "2"
+    tph: "4"
   database: ""
   deployEnabled: true
   description: Materialized Order View
