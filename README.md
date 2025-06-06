@@ -53,7 +53,7 @@ Schedule Options is available only when Schedule Refresh toggle is True
 
 | **Option** | **Description** |
 |------------|----------------|
-|**Task Schedule**| Options in Task Schedule<br>- Periodic Schedule<br/>- CRON    |
+|**Task Schedule**| Options in Task Schedule<br/>- Periodic Schedule<br/>- CRON    |
 |**Schedule refesh-time period**|Available when Task Schedule is Set to Periodic Schedule<br/>Options in Schedule refesh-time period<br/>-Every Hours<br/>-Every Days<br/>-Every Weeks |
 |**Specific interval of periodic refresh(integer value)**|Available when Task Schedule is Set to Periodic Schedule |
 |**CRON string**|Available when Task Schedule is Set to CRON|
