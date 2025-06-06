@@ -1,6 +1,6 @@
-# Databricks Materialized View Stage
+# Databricks Materialized View 
 
-The Databricks Materialized View Stage UDN is a versatile node that allows you to develop and deploy a Materialized View in Databricks.
+The Databricks Materialized View UDN is a versatile node that allows you to develop and deploy a Materialized View in Databricks.
 
 A [materialized view](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-materialized-view) is a view where precomputed results are available for query and can be updated to reflect changes in the input. Each time a materialized view is refreshed, query results are recalculated to reflect changes in upstream datasets. All materialized views are backed by a DLT pipeline. You can refresh materialized views manually or on a schedule.
 
