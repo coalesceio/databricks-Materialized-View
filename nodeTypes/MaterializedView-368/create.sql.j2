@@ -289,7 +289,6 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
         {% endfor %}              
      {%endif%}
 
-     #Other constraints
 
 
 
@@ -303,7 +302,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
       (
 
         {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif%}{%endif%}
-        {%-if desiredState.config.foreignk == true%}{{ns.foreignkeyValues}}{%-endif%} 
+        {%-if desiredState.config.foreignk == true%}{{ns.foreignkeyValues}}{%-endif%} )
          {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
          {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
          {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}

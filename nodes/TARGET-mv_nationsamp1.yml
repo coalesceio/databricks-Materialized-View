@@ -24,9 +24,9 @@ operation:
     primarykeycon:
       items:
         - primarykey:
-            columnCounter: 1db14001-b1d8-44ba-a965-d84ed0b38a00
+            columnCounter: 9c3921fd-0041-418e-9e80-df8bebf52e9a
             stepCounter: 361e01b6-3ba0-4514-aad2-52159b4ace89
-    primarykeyname: pk_nations
+    primarykeyname: pk_nations_new
     schedulePeriodOption: Periodic schedule
     schedulerefresh: true
     tableconstraints: true
