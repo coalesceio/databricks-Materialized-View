@@ -27,18 +27,12 @@ metadata:
             
         - groupName: General options
           items:
-
-          - displayName: Infer MV structure
-            attributeName: infermvstruct
-            type: toggleButton
           
           - displayName: Schedule refresh
             attributeName: schedulerefresh
             type: toggleButton
-            enableIf: "{% if (config.infermvstruct) %} false {% else %} true {% endif %}"
 
         - groupName: Materialized View Options
-          enableIf: "{% if (config.infermvstruct) %} false {% else %} true {% endif %}"
           items:
           
           - displayName: Table properties
@@ -116,42 +110,7 @@ metadata:
           
             isRequired: false
             enableIf: "{% if (config.tableconstraints and config.foreignk ) %} true {% else %} false {% endif %}"
-          
-          - type: toggleButton
-            attributeName: constraints
-            displayName: Other constraints
-            default: false
-            isRequired: false
-            
-
-
-          - type: tabular
-            displayName: 'Constraints'
-            attributeName: constraintsspec
-            columns:
-
-            -  type: columnDropdownSelector
-               displayName: ColumnName
-               attributeName: columnName
-               isRequired: false
-          
-            -  type: textBox
-               displayName: Expected Expression
-               attributeName: sqlExpression
-               default: "ex:<column_name> IS NOT NULL"
-               isRequired: false
-            
-            -  type: dropdownSelector
-               displayName: ON VIOLATION
-               attributeName: onviolation
-               default: DROP ROW
-               options:
-               - FAIL UPDATE
-               - DROP ROW 
-          
-            isRequired: false
-            enableIf: "{% if config.constraints %} true {% else %} false {% endif %}"
-
+        
         - groupName: Schedule Options
           enableIf: "{% if (config.schedulerefresh ) %} true {% else %} false {% endif %}"
           items:

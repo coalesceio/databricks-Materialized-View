@@ -245,26 +245,6 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
   {%if currentState == undefined  or ns.createTst == true%}
        
        
-	 {%if desiredState.config.infermvstruct == true %}
-
-      {{ stage('CREATE MATERIALIZED VIEW',true, "sql", "create") }}
-
-      CREATE OR REPLACE MATERIALIZED VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }} 
-     AS
-     SELECT 
-     {%- for col in desiredState.sources[0].columns %}
-       {%- if col.transform == "" %}
-        `{{ col.name }}`
-       {%- else %}
-        {{ get_source_transform(col) }} AS `{{ col.name }}`
-       {%- endif %}
-      {%- if not loop.last -%}, {%- endif -%}
-     {%- endfor %}
-     FROM 
-     (`{{ db }}`.`{{ sch }}`.`{{ desiredState.sources[0].dependencies[0].node.name }}`)
-    {{ get_clause_new(join_clause) }} 
-    
-   {%else%}
      {# Partition by clause #}
 
       {%if desiredState.config.partclause == true%}
@@ -312,20 +292,6 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
      #Other constraints
 
 
-      {%if desiredState.config.constraints == true%}
-	
-	       {% set column, expression,violation = desiredState.config.constraintsspec.get('items') | map(attribute='columnName.name')| list, desiredState.config.constraintsspec.get('items') | map(attribute='sqlExpression') | list ,
-	      desiredState.config.constraintsspec.get('items') | map(attribute='onviolation') | list%}
-
-	     
-	        {% for r in column %}
-	
-			      {%set ns.oconstraints = ns.oconstraints + 'CONSTRAINT ' + r + ' EXPECT('+ expression[loop.index0] + ') ON VIOLATION ' + violation[loop.index0] %}
-           {% if not loop.last %}
-            {%set ns.oconstraints = ns.oconstraints +',' %}
-           {% endif %}                
-         {% endfor %}
-	    {%endif%}
 
 
 
@@ -335,17 +301,9 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
 
       CREATE OR REPLACE MATERIALIZED VIEW  {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
       (
-        {%- for col in desiredState.sources[0].columns %}
-            `{{ col.name }}` {{ col.dataType }}
-            {%- if not col.nullable %} NOT NULL
-            {%- endif %}
-            {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{%- endif %}
-            {%- if not loop.last %}, {%- endif %}
-            {%-if loop.last and (desiredState.config.foreign == true or desiredState.config.primary == true) -%},{%-endif%}
-        {%- endfor %}
+
         {% if desiredState.config.primary == true%} {{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif%}{%endif%}
-        {%-if desiredState.config.foreignk == true%}{{ns.foreignkeyValues}}{%-endif%}
-        {%-if desiredState.config.constraints == true%}{{ns.oconstraints}}{%-endif%}  )  
+        {%-if desiredState.config.foreignk == true%}{{ns.foreignkeyValues}}{%-endif%} 
          {% if desiredState.node.description | length > 0 %} COMMENT '{{ desiredState.node.description |escape }}'{%endif%}
          {%- if desiredState.config.partclause == true %} {{ ns.partValues }} {%-endif%}
          {%- if desiredState.config.tblproperties != ""-%}TBLPROPERTIES ({{desiredState.config.tblproperties}}){%-endif%}
@@ -372,7 +330,7 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
         (`{{db}}`.`{{sch}}`.`{{desiredState.sources[0].dependencies[0].node.name}}`)
          {{ get_clause_new(join_clause) }}
 
-   {%endif%} 
+  
  {%endif%}
      {%if ns.alterTest == true %}
          

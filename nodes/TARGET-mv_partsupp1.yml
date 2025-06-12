@@ -3,10 +3,14 @@ id: 3f446487-5cdc-44e2-81da-7da5e7aa9b35
 name: mv_partsupp1
 operation:
   config:
-    constraints: false
+    constraints: true
     constraintsspec:
       items:
-        - {}
+        - columnName:
+            columnCounter: 5b973a81-7332-45f1-8f85-becf068b0709
+            stepCounter: 3f446487-5cdc-44e2-81da-7da5e7aa9b35
+          onviolation: DROP ROW
+          sqlExpression: ps_suppkey IS NOT NULL
     cron: ""
     foreign: false
     foreignkeycon:
