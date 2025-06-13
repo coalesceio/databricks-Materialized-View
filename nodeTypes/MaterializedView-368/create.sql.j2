@@ -314,10 +314,8 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
         SELECT 
         {% for col in desiredState.sources[0].columns %}
                  {{ get_source_transform(col) }} AS `{{ col.name }}`
-            {%-endif-%}
             {%- if not loop.last -%}, {% endif %}
        {%- endfor %}
-        FROM
         {{desiredState.sources[0].join}}
 
   

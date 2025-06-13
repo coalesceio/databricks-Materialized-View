@@ -1,0 +1,356 @@
+fileVersion: 1
+id: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+name: dlt_customers1
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE1
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 96fb30f6-54ac-41cc-bd5b-6443ebedd04d
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        name: customer_id
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: a56e3e7c-70d9-44da-a9bc-e22ab7aa027c
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: DOUBLE
+        defaultValue: ""
+        description: ""
+        name: tax_id
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: fef24917-2ef9-4bfb-8b54-6098757534b8
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: tax_code
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9115a613-b571-47ed-9259-cb6104b2a2a3
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: customer_name
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5df16cbb-54c7-4efd-b3ce-ca06c8ca56ae
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: state
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 10365e76-d3dd-40b7-a5bc-cd1c682393d9
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: city
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: f74e612a-3538-458e-aa56-a8d44d232aff
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: postcode
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: fa72edd7-7e10-4115-857e-8956ca0cc234
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: street
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: e838b16e-a996-40b4-9b90-591450d30410
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: number
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 976aaeea-3aa4-4ec2-a599-7f0be891f700
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: unit
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ed88304e-036d-4b23-afcc-d319852b6fe5
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: region
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9ec45b4f-945e-4752-9c3e-09164ed0c90b
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: district
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4b1040c8-c609-4236-a486-6d8841842f86
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: DOUBLE
+        defaultValue: ""
+        description: ""
+        name: lon
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0ec40149-d914-4f9c-ada9-a4cfea5776b2
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: DOUBLE
+        defaultValue: ""
+        description: ""
+        name: lat
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: b4964c90-bddf-475e-b2ab-5025a3cdf5eb
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: ship_to_address
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2fe20b20-a281-4b47-865d-e975f255fe14
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        name: valid_from
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: b8864b27-8725-4307-b07d-194876c08c18
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: DOUBLE
+        defaultValue: ""
+        description: ""
+        name: valid_to
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 56f6e1a3-1d24-4539-8667-0ec7cd0bafb9
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: DOUBLE
+        defaultValue: ""
+        description: ""
+        name: units_purchased
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: e2e79ab9-5173-4b37-8cfb-44f1e73bf118
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        name: loyalty_segment
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 00b2d6a9-8bc2-46d1-a8e5-94c388fe961a
+          stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: _rescued_data
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+  name: dlt_customers1
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

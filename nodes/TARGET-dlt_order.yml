@@ -1,0 +1,169 @@
+fileVersion: 1
+id: f3adcaa1-c98e-4d47-93f6-ce320742f946
+name: dlt_order
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: TARGET
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 892db79a-1972-4c5d-9f9a-038abeeaa836
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: ARRAY
+        defaultValue: ""
+        description: ""
+        name: clicked_items
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 642ddee8-f886-4a30-8977-52d7b591235d
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: customer_id
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: de437ba4-c3fc-45b1-94c7-236e4afeb671
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: customer_name
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: e7975353-1026-4b97-8439-bb3d439dedd3
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: number_of_line_items
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: bdb5b003-c2a5-432b-a1c8-b8c93b351f74
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: order_datetime
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 08b42455-05fd-4fd8-b252-5016e2c1983e
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: LONG
+        defaultValue: ""
+        description: ""
+        name: order_number
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 559955b1-b121-4916-bf4b-c6a2e267e991
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: ARRAY
+        defaultValue: ""
+        description: ""
+        name: ordered_products
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 88f19410-cfb6-481b-9fc7-11a6d2ce93b7
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: ARRAY
+        defaultValue: ""
+        description: ""
+        name: promo_info
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 392d27d9-fc5a-4589-9ce0-3727f9f3d938
+          stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        name: _rescued_data
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+  name: dlt_order
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

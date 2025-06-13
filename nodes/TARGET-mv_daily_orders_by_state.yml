@@ -1,0 +1,107 @@
+fileVersion: 1
+id: b32f07ab-9330-4210-944b-2ab04b9cf905
+name: mv_daily_orders_by_state
+operation:
+  config:
+    cron: ""
+    crontz: ""
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    materializationSelector: MATERIALIZED VIEW
+    partclause: false
+    partitionclause:
+      items:
+        - {}
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    schedulePeriodOption: ""
+    schedulerefresh: false
+    tableconstraints: false
+    tblproperties: pipelines.channel = "FINAL"
+    tp: ""
+    tph: ""
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: MATERIALIZED VIEW
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0b2dab7e-54ac-4e49-8976-79879cf4f305
+          stepCounter: b32f07ab-9330-4210-944b-2ab04b9cf905
+        config: {}
+        dataType: STRING
+        description: ""
+        name: state
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 849a3933-9206-4186-8467-e95bd0592bae
+                stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c468ee5f-a3bb-42e6-b3fa-247b64ff720b
+          stepCounter: b32f07ab-9330-4210-944b-2ab04b9cf905
+        config: {}
+        dataType: STRING
+        description: ""
+        name: order_date
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 81826ac5-ba29-4960-9225-ddb78bec5cb7
+                stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9a3567df-eae0-450e-a5c3-1d4360e3b3a3
+          stepCounter: b32f07ab-9330-4210-944b-2ab04b9cf905
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: order_count
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: count(*)
+        systemColumnType: None
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          mv_customers_order: 43232117-a2a7-4258-a5cd-21b638255f14
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: TARGET
+            nodeName: mv_customers_order
+        join:
+          joinCondition: |-
+            FROM {{ ref('TARGET', 'mv_customers_order') }} `mv_customers_order`
+            group by `state`,`order_date`
+        name: mv_daily_orders_by_state
+        noLinkRefs: []
+  name: mv_daily_orders_by_state
+  overrideSQL: false
+  schema: ""
+  sqlType: "368"
+  type: sql
+  version: 1
+type: Node

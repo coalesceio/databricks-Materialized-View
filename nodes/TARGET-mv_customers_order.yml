@@ -1,0 +1,121 @@
+fileVersion: 1
+id: 43232117-a2a7-4258-a5cd-21b638255f14
+name: mv_customers_order
+operation:
+  config:
+    cron: ""
+    crontz: ""
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    materializationSelector: MATERIALIZED VIEW
+    partclause: true
+    partitionclause:
+      items:
+        - partname:
+            columnCounter: 22b3c0c0-336c-45a4-876a-a384a11a3d6d
+            stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    schedulePeriodOption: Periodic schedule
+    schedulerefresh: true
+    tableconstraints: false
+    tblproperties: ""
+    tp: EVERY DAYS
+    tph: "30"
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: MATERIALIZED VIEW
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 22b3c0c0-336c-45a4-876a-a384a11a3d6d
+          stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+        config: {}
+        dataType: INT
+        description: ""
+        name: customer_id
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 96fb30f6-54ac-41cc-bd5b-6443ebedd04d
+                stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 849a3933-9206-4186-8467-e95bd0592bae
+          stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+        config: {}
+        dataType: STRING
+        description: ""
+        name: state
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5df16cbb-54c7-4efd-b3ce-ca06c8ca56ae
+                stepCounter: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 81826ac5-ba29-4960-9225-ddb78bec5cb7
+          stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+        config: {}
+        dataType: STRING
+        description: ""
+        name: order_date
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: bdb5b003-c2a5-432b-a1c8-b8c93b351f74
+                stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+            transform: date(timestamp(try_cast(`dlt_order`.`order_datetime` AS INT)))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 65913f2f-1964-47ba-8d53-3f4eee37ad3e
+          stepCounter: 43232117-a2a7-4258-a5cd-21b638255f14
+        config: {}
+        dataType: LONG
+        description: ""
+        name: order_number
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 08b42455-05fd-4fd8-b252-5016e2c1983e
+                stepCounter: f3adcaa1-c98e-4d47-93f6-ce320742f946
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          dlt_customers1: a19fd670-9ed3-4ec4-b123-72aa0b6aed7d
+          dlt_order: f3adcaa1-c98e-4d47-93f6-ce320742f946
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE1
+            nodeName: dlt_customers1
+          - locationName: TARGET
+            nodeName: dlt_order
+        join:
+          joinCondition: |-
+            FROM {{ ref('SOURCE1', 'dlt_customers1') }} `dlt_customers1`
+            INNER JOIN {{ ref('TARGET', 'dlt_order') }} `dlt_order`
+            ON `dlt_customers1`.`customer_id` = `dlt_order`.`customer_id`
+        name: mv_customers_order
+        noLinkRefs: []
+  name: mv_customers_order
+  overrideSQL: false
+  schema: ""
+  sqlType: "368"
+  type: sql
+  version: 1
+type: Node
