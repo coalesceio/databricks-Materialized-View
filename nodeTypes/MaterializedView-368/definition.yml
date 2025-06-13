@@ -15,9 +15,9 @@ metadata:
 
 
     config:
-        - groupName: Materialization Type
-          enableIf: "true"
+        - groupName: General options
           items:
+          
           - displayName: Object Type
             attributeName: materializationSelector
             type: materializationSelector
@@ -25,8 +25,6 @@ metadata:
             options:
             - MATERIALIZED VIEW
             
-        - groupName: General options
-          items:
           
           - displayName: Schedule refresh
             attributeName: schedulerefresh

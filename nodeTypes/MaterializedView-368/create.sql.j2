@@ -289,11 +289,6 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
         {% endfor %}              
      {%endif%}
 
-
-
-
-
-
        {# CreateSQL for Materialized view #}
 
        {{ stage('CREATE MATERIALIZED VIEW', true, "sql", "create") }}
@@ -318,16 +313,12 @@ descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrent
         AS
         SELECT 
         {% for col in desiredState.sources[0].columns %}
-            {%-if col.transform == "" %}
-                `{{col.name}}`
-            {%-else-%}
                  {{ get_source_transform(col) }} AS `{{ col.name }}`
             {%-endif-%}
             {%- if not loop.last -%}, {% endif %}
        {%- endfor %}
         FROM
-        (`{{db}}`.`{{sch}}`.`{{desiredState.sources[0].dependencies[0].node.name}}`)
-         {{ get_clause_new(join_clause) }}
+        {{desiredState.sources[0].join}}
 
   
  {%endif%}
