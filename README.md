@@ -22,17 +22,17 @@ There are four configs within the **Node Properties** group.
 | **Node Type** | Name of template used to create node objects |
 | **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
-### Key point 
+### Key point -limitations
 
-* Materialized View automatically infers the structure of the source table and defines the data type of columns.Hence we create materialized view without column definition in Infer stage(keeping infer toggle enabled)
-* Re-Sync the columns and the mapping grid will be updated with the expected column structure
-* Keep the infer toggle off,create the Materializsed View with the intended column or table-level constraints 
+* Materialized View automatically infers the structure of the source table and defines the data type of columns.
+* Multi-source is not supported with this version of Databricks Materialized View in Coalesce
+* Column-level constraints like NOT NULL,column-level descriptions are also not supported with this version of Databricks Materialized View in Coalesce
 
 ### General Options
 
 | **Option** | **Description** |
 |------------|----------------|
-| **Infer MV structure** | True / False toggle<br/>- **True**: Materialized View Options will be disabled<br/>- **False**:  Materialized View Options will be visible  |
+| **Create As** | Choose materialization type-by default it is MATERIALIZED VIEW  |
 |**Schedule refresh**| True / False toggle<br/>- **True**: Schedule Option will be visible<br/>- **False**:  Schedule Option will be disabled|
 
 ### Materialized View Options
