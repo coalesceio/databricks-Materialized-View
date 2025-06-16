@@ -75,6 +75,20 @@ After the Materialized View has deployed for the first time into a target enviro
 
 If a Materialized View is to be altered this will run the following stage:
 
+#### Altering the Materialized View
+
+The following config changes trigger ALTER statements:
+
+1. Add schedule
+2. Alter schedule
+3. Drop schedule
+
+These execute the two stages:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Alter Materialized View** | Executes ALTER to modify parameters |
+
 #### Recreating the Materialized View
 
 If anything changes other than the configuration options specified above then the Materialized View will be recreated by running a CREATE OR REPLACE statement.
