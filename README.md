@@ -11,7 +11,7 @@ The Databricks Materialized View Stage has Four configuration groups:
 * [Node Properties](#node-properties)
 * [General Options](#general-options)
 * [Materialized View Options](#materialized-view-options)
-* [Schedule Option](#schedule-option)
+* [Schedule Option](#schedule-options)
 
 ### Node Properties
 There are four configs within the **Node Properties** group.
