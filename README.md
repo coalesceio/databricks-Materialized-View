@@ -1,12 +1,12 @@
 # Databricks Materialized View 
 
-The Databricks Materialized View UDN is a versatile node that allows you to develop and deploy a Materialized View in Databricks.
+The Databricks Materialized View UDN is a versatile Node that allows you to develop and deploy a Materialized View in Databricks.
 
 A [materialized view](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-materialized-view) is a view where precomputed results are available for query and can be updated to reflect changes in the input. Each time a materialized view is refreshed, query results are recalculated to reflect changes in upstream datasets. All materialized views are backed by a DLT pipeline. You can refresh materialized views manually or on a schedule.
 
 ## Node Configuration
 
-The Databricks Materialized View Stage has Four configuration groups:
+The Databricks Materialized View Stage has 4 configuration groups:
 
 * [Node Properties](#node-properties)
 * [General Options](#general-options)
@@ -20,13 +20,15 @@ There are four configs within the **Node Properties** group.
 |-------------|-----------------|
 | **Storage Location** | Storage Location where the Materialized View will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Deploy Enabled** | If TRUE the Node will be deployed or redeployed when changes are detected<br/>If FALSE the Node will not be deployed or will be dropped during redeployment |
 
-### Key point -limitations
+### Key Points and Limitations
+
+The following limitations apply to the Databricks Materialized View Node:
 
 * Materialized View automatically infers the structure of the source table and defines the data type of columns.
 * Multi-source is not supported with this version of Databricks Materialized View in Coalesce
-* Column-level constraints like NOT NULL,column-level descriptions are also not supported with this version of Databricks Materialized View in Coalesce
+* Column-level constraints like NOT NULL and column-level descriptions are also not supported with this version of Databricks Materialized View in Coalesce
 
 ### General Options
 
